@@ -8,12 +8,29 @@ class DataCluster:
     def __init__(self, data):
         self.data = data
         self.grouped_data = None
+        self.fuzzy = None
 
-    def create_cluster(self):
-        fuzzy = self.create_fuzzy(4, self.data)
-        score = self.cluster_quality(self.data, fuzzy.labels_)
+    def choose_best_cluster(self, min_clusters, max_clusters):
+        scores = list()
+
+        for k in range(min_clusters, max_clusters):
+            data = self.data.copy()
+            score, fuzzy = self.create_cluster(data, k)
+            scores.append(score)
+
+        max_score = max(scores)
+        k = scores.index(max_score) + min_clusters
+        score, fuzzy = self.create_cluster(self.data, k)
+
+        self.fuzzy = fuzzy
         self.grouped_data = self.group_data(self.data, fuzzy.labels_)
-        self.plot(self.data, fuzzy, 4, score)
+        print(self.grouped_data.get_group(2))
+        self.plot(self.data, fuzzy, k, score)
+
+    def create_cluster(self, data, number_of_clusters):
+        fuzzy = self.create_fuzzy(number_of_clusters, data)
+        score = self.cluster_quality(data, fuzzy.labels_)
+        return score, fuzzy
 
     def create_fuzzy(self, number_of_clusters, data):
         fuzzy_kmeans = FuzzyKMeans(k=number_of_clusters, m=4, max_iter=300)
