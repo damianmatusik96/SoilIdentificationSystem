@@ -5,7 +5,7 @@ from mlxtend.preprocessing import minmax_scaling
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from app.IndentificationSystem import data_handler
+from app.IndentificationSystem import data_handler_1
 
 
 class DataScaller:

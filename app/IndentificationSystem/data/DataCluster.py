@@ -1,10 +1,11 @@
+from sklearn.metrics import silhouette_score as ss
 import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.metrics import silhouette_score as ss
 from sklearn_extensions.fuzzy_kmeans import FuzzyKMeans
 
 
 class DataCluster:
+
     def __init__(self, data):
         self.data = data
         self.grouped_data = None
@@ -33,7 +34,7 @@ class DataCluster:
         return score, fuzzy
 
     def create_fuzzy(self, number_of_clusters, data):
-        fuzzy_kmeans = FuzzyKMeans(k=number_of_clusters, m=4, max_iter=300)
+        fuzzy_kmeans = FuzzyKMeans(k=number_of_clusters, m=2, max_iter=100)
         fuzzy_kmeans.fit(data)
         return fuzzy_kmeans
 
@@ -51,11 +52,11 @@ class DataCluster:
         for center in fuzzy.cluster_centers_:
             plt.plot(center[0], center[1], 'ro')
 
-        data.plot.scatter(x=0, y=1, c='labels', colormap='viridis')
+        data.plot.scatter(x='b', y='c', c='labels', colormap='viridis')
         plt.xlabel("Param 1")
         plt.ylabel("Param2")
         plt.title(f'K = {number_of_clusters}, Silhouette score = {score}')
-        plt.show()
+        # plt.show()
 
 # for self.datapd['labels']
 

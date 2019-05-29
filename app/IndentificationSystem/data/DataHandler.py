@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 class DataHandler:
     def __init__(self):
         self.data = None
@@ -13,4 +14,3 @@ class DataHandler:
         data_pr = data[["b", "c"]]
 
         self.data = data_pr
-
