@@ -11,6 +11,11 @@ class DataCluster:
         self.grouped_data = None
         self.fuzzy = None
 
+    @staticmethod
+    def order_data(data, order_by):
+        sorted_data = data.sort([order_by])
+        return sorted_data[['param_1', 'param_2']]
+
     def choose_best_cluster(self, min_clusters, max_clusters):
         scores = list()
 
@@ -40,7 +45,7 @@ class DataCluster:
 
     def cluster_quality(self, data, labels):
         data['labels'] = pd.Series(labels)
-        score = ss(data[['b', 'c']], labels=data['labels'])
+        score = ss(data[['param_1', 'param_2']], labels=data['labels'])
         return score
 
     def group_data(self, data, labels):
@@ -52,9 +57,9 @@ class DataCluster:
         for center in fuzzy.cluster_centers_:
             plt.plot(center[0], center[1], 'ro')
 
-        data.plot.scatter(x='b', y='c', c='labels', colormap='viridis')
+        data.plot.scatter(x='param_1', y='param_2', c='labels', colormap='viridis')
         plt.xlabel("Param 1")
-        plt.ylabel("Param2")
+        plt.ylabel("Param 2")
         plt.title(f'K = {number_of_clusters}, Silhouette score = {score}')
         # plt.show()
 

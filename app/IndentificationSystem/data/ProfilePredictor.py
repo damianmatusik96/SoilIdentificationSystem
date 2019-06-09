@@ -32,10 +32,10 @@ class ProfilePredictor:
         max_values = []
         min_values = []
         for group_label in cluster_data['labels'].unique():
-            max_param1 = np.max(learning_data['b'].get_group(group_label))
-            max_param2 = np.max(learning_data['c'].get_group(group_label))
-            min_param1 = np.min(learning_data['b'].get_group(group_label))
-            min_param2 = np.min(learning_data['c'].get_group(group_label))
+            max_param1 = np.max(learning_data['param_1'].get_group(group_label))
+            max_param2 = np.max(learning_data['param_2'].get_group(group_label))
+            min_param1 = np.min(learning_data['param_1'].get_group(group_label))
+            min_param2 = np.min(learning_data['param_2'].get_group(group_label))
             tuple_max = (max_param1, max_param2)
             tuple_min = (min_param1, min_param2)
             max_values.append(tuple_max)
@@ -57,16 +57,16 @@ class ProfilePredictor:
                     data.set_value(i, 'labels', np.max(data['labels']))
 
         print(data['labels'])
-        score = ss(data[['b', 'c']], labels=data['labels'])
+        score = ss(data[['param_1', 'param_2']], labels=data['labels'])
         return score
 
     # print(max_values)
     # print(min_values)
     # print(sec_datapd)
     def show_result(self, data, number_of_clusters, score):
-        data.plot.scatter(x=0, y=1, c='labels', colormap='viridis')
+        data.plot.scatter(x='param_1', y='param_2', c='labels', colormap='viridis')
         plt.xlabel("Param 1")
-        plt.ylabel("Param2")
+        plt.ylabel("Param 2")
         plt.title(f'K = {number_of_clusters}, Silhouette score = {score}')
         # plt.show()
 

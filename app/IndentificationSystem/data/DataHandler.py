@@ -10,7 +10,7 @@ class DataHandler:
             data = pd.read_csv("IndentificationSystem\\data\\files\\" + file, sep=";", header=None)
         except:
             print("Cannot open file")
-        data.columns = ["a", "b", "c"]
-        data_pr = data[["b", "c"]]
+        data.columns = ["depth", "param_1", "param_2"]
+        data_pr = data[["param_1", "param_2"]]
 
-        self.data = data_pr
+        self.data = data

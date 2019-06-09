@@ -12,11 +12,11 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import silhouette_score as ss
 
 data = pd.read_csv("sdm.csv", sep=";", header=None)
-data.columns = ["a", "b", "c"]
+data.columns = ["depth", "param_1", "param_2"]
 
-data_pr = data[["b", "c"]]
+data_pr = data[["param_1", "param_2"]]
 
-plt.scatter(data_pr.b, data_pr.c)
+plt.scatter(data_pr.param_1, data_pr.param_2)
 
 kmeans = km(init='k-means++', n_clusters=3, random_state=0).fit(data_pr.as_matrix())
 # data_pr['labels'] =pd.Series(kmeans.labels_)
