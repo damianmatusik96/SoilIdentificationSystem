@@ -7,7 +7,7 @@ from sklearn_extensions.fuzzy_kmeans import FuzzyKMeans
 class DataCluster:
 
     def __init__(self, data):
-        self.data = data
+        self.data = data.copy()
         self.grouped_data = None
         self.fuzzy = None
 
@@ -30,7 +30,6 @@ class DataCluster:
 
         self.fuzzy = fuzzy
         self.grouped_data = self.group_data(self.data, fuzzy.labels_)
-        print(self.grouped_data.get_group(2))
         self.plot(self.data, fuzzy, k, score)
 
     def create_cluster(self, data, number_of_clusters):

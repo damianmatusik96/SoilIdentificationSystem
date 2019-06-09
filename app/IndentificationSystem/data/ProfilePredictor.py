@@ -6,7 +6,7 @@ from sklearn.metrics import silhouette_score as ss
 
 class ProfilePredictor:
     def __init__(self, data, cluster, clusters_list=None):
-        self.data = data
+        self.data = data.copy()
         self.cluster = cluster
         # self.cluster_list = clusters_list
 
@@ -50,13 +50,12 @@ class ProfilePredictor:
                 x, y, z = data.values[i]
                 max1, max2 = max_values[j]
                 min1, min2 = min_values[j]
-                # print(x,y)
-                if x > min1 and x < max1 and y > min2 and y < max2:
-                    data.set_value(i, 'labels', j)
-                if x > max1 and y > max2:
-                    data.set_value(i, 'labels', np.max(data['labels']))
 
-        print(data['labels'])
+                if x > min1 and x < max1 and y > min2 and y < max2:
+                    data.at[i, 'labels'] =  j
+                if x > max1 and y > max2:
+                    data.at[i, 'labels'] =  np.max(data['labels'])
+
         score = ss(data[['param_1', 'param_2']], labels=data['labels'])
         return score
 
