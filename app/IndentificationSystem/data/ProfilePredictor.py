@@ -66,7 +66,7 @@ class ProfilePredictor:
         data.plot.scatter(x='param_1', y='param_2', c='labels', colormap='viridis')
         plt.xlabel("Param 1")
         plt.ylabel("Param 2")
-        plt.title(f'K = {number_of_clusters}, Silhouette score = {score}')
+        plt.title(f'K = 3, Silhouette score = {score}')
         # plt.show()
 
 # def get_best_profile(self):
