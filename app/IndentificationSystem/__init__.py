@@ -13,3 +13,5 @@ data_cluster = DataCluster(datah.sorted_data_pr)
 
 data_cluster_3 = DataCluster(data_handler_3.raw_data_pr)
 #todo dopracowac pierwszy klaster
+
+# todo LUBIE KUTASY
