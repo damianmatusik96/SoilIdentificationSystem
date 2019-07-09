@@ -1,10 +1,12 @@
-from flask import render_template
 from werkzeug.utils import secure_filename
 
 
-def saveFiles(request):
+def save_files(request):
     if request.method == 'POST':
         files = request.files.getlist('files[]')
         for file in files:
             file.save(secure_filename(file.filename))
-        return render_template('index.html')
+
+
+def hello():
+    return "hello"
