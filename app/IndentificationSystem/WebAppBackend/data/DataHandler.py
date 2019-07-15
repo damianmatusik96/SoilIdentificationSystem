@@ -12,7 +12,9 @@ class DataHandler:
         list = []
         for file in files:
             try:
-                data = pd.read_csv(file, sep=";", header=None)
+                filepath = "/home/damian/PycharmProjects/SoilIdentificationSystem-1.0/" \
+                           "app/IndentificationSystem/WebAppBackend/data/files/" + file
+                data = pd.read_csv(filepath, sep=";", header=None)
                 list.append(data)
             except IOError as e:
                 print(f'Cannot open file. {e}')

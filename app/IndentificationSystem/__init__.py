@@ -1,5 +1,5 @@
-from WebAppBackend.data.DataHandler import DataHandler
-from WebAppBackend.data.DataCluster import DataCluster
+from data.DataHandler import DataHandler
+from data.DataCluster import DataCluster
 
 data_handler_3 = DataHandler()
 data_handler_3.get_data("sdmt3.csv")

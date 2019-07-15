@@ -1,5 +1,5 @@
 from app.IndentificationSystem import data_cluster, data_handler_3, data_cluster_3
-from WebAppBackend.data.ProfilePredictor import ProfilePredictor
+from data.ProfilePredictor import ProfilePredictor
 import matplotlib.pyplot as plt
 
 

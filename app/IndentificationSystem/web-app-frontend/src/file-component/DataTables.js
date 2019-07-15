@@ -49,6 +49,9 @@ const FileTable = ({title, text, type}) => (
         </div>
 
 );
+const getProfile = () => (
+    <p>Hello</p>
+);
 
 const DataTables = () => (
         <section>
@@ -68,6 +71,13 @@ const DataTables = () => (
                             type='predict'
                         />
                     </Col>
+                </Row>
+                <Row>
+                    <Button variant='dark'
+                            type='submit'
+                            onClick={() => getProfile}>
+                        Pokaz profil
+                    </Button>
                 </Row>
             </Container>
         </section>
