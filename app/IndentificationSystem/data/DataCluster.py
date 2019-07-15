@@ -5,7 +5,6 @@ from sklearn_extensions.fuzzy_kmeans import FuzzyKMeans
 
 
 class DataCluster:
-
     def __init__(self, data):
         self.data = data.copy()
         self.grouped_data = None

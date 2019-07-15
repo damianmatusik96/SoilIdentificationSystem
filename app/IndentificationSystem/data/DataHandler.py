@@ -12,7 +12,7 @@ class DataHandler:
         list = []
         for file in files:
             try:
-                data = pd.read_csv("IndentificationSystem\\data\\files\\" + file, sep=";", header=None)
+                data = pd.read_csv('/data/files/' + file, sep=";", header=None)
                 list.append(data)
             except IOError as e:
                 print(f'Cannot open file. {e}')

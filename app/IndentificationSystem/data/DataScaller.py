@@ -15,12 +15,6 @@ class DataScaller:
         self.scaled_data = minmax_scaling(data, columns=[0])
         self.normalized_data = stats.boxcox(data)
 
-    # fig, ax = plt.subplots(1, 2)
-    # sns.distplot(original_data, ax=ax[0])
-    # ax[0].set_title("Original Data")
-    # sns.distplot(scaled_data, ax=ax[1])
-    # ax[1].set_title("Scaled Data")
-
     def show_scaled_data(self):
         fig, ax = plt.subplots(1, 2)
         sns.distplot(self.original_data, ax=ax[0])

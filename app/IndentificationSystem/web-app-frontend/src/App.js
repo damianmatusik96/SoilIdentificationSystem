@@ -15,13 +15,14 @@ class SubmitComponent extends React.Component {
         formData.append('file', files[0]);
         console.warn("msg", formData);
         this.setState({file: formData});
-                // e.preventDefault();// Stop form submit
+        //e.preventDefault();// Stop form submit
         this.fileUpload(formData)
     };
     fileUpload = (formData) => {
         const url = 'http://localhost:5000/uploader';
-        return fetch(url, { method: 'POST', body: formData }).then(response => console.log(response));
         // return post(url, formData).then(response => console.warn("result: ", response))
+        return fetch(url, { method: 'POST', body: formData}).then(response => console.log(response));
+
     };
     render() {
         return (
@@ -98,4 +99,4 @@ const App = () => (
     </div>
 
 );
-export default SubmitComponent;
+export default App;
