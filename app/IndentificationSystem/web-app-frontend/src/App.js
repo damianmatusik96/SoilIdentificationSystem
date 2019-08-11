@@ -1,11 +1,7 @@
 import React from 'react';
 import DataTables from './file-component/DataTables'
 import TopBar from './top-bar-component/TopBar'
-import {
-    Route,
-    BrowserRouter as Router,
-    Link
-} from "react-router-dom";
+import {Route, BrowserRouter as Router} from "react-router-dom";
 
 const Home = () => (
     <div className="App">

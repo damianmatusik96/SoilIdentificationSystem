@@ -36,12 +36,14 @@ class DataCluster:
         score = self.cluster_quality(data, fuzzy.labels_)
         return score, fuzzy
 
-    def create_fuzzy(self, number_of_clusters, data):
+    @staticmethod
+    def create_fuzzy(number_of_clusters, data):
         fuzzy_kmeans = FuzzyKMeans(k=number_of_clusters, m=2, max_iter=100)
         fuzzy_kmeans.fit(data)
         return fuzzy_kmeans
 
-    def cluster_quality(self, data, labels):
+    @staticmethod
+    def cluster_quality(data, labels):
         data['labels'] = pd.Series(labels)
         score = ss(data[['param_1', 'param_2']], labels=data['labels'])
         return score

@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 
 from WebAppBackend.service import FileService
 
@@ -19,6 +19,11 @@ def upload_train_file():
 @home_blue.route('/save/predict', methods=['POST'])
 def upload_predict_file():
     return FileService.save_files(request, "predict_data")
+
+
+# @home_blue.route('/predict', methods=['GET'])
+# def get_profile():
+#     return FileService.main()
 
 
 

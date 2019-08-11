@@ -12,8 +12,7 @@ class DataHandler:
         list = []
         for file in files:
             try:
-                filepath = "/home/damian/PycharmProjects/SoilIdentificationSystem-1.0/" \
-                           "app/IndentificationSystem/WebAppBackend/data/files/" + file
+                filepath = file
                 data = pd.read_csv(filepath, sep=";", header=None)
                 list.append(data)
             except IOError as e:

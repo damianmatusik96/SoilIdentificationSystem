@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.metrics import silhouette_score as ss
+from sklearn.metrics import silhouette_score
 
 
 class ProfilePredictor:
-    def __init__(self, data, cluster, clusters_list=None):
+    def __init__(self, data, cluster):
         self.data = data.copy()
         self.cluster = cluster
         # self.cluster_list = clusters_list
@@ -25,10 +25,11 @@ class ProfilePredictor:
 
     def get_profile(self, fuzzy, cluster_data, data, learning_data):
         min, max = self.get_bounds(cluster_data, learning_data)
-        score = self.set_labels(data, min, max, learning_data, fuzzy)
+        score = self.set_labels(data, min, max, fuzzy)
         return score
 
-    def get_bounds(self, cluster_data, learning_data):
+    @staticmethod
+    def get_bounds(cluster_data, learning_data):
         max_values = []
         min_values = []
         for group_label in cluster_data['labels'].unique():
@@ -42,7 +43,8 @@ class ProfilePredictor:
             min_values.append(tuple_min)
         return min_values, max_values
 
-    def set_labels(self, data, min_values, max_values, learning_data, fuzzy):
+    @staticmethod
+    def set_labels(data, min_values, max_values, fuzzy):
 
         data['labels'] = pd.Series(fuzzy.labels_)
         for i in range(0, len(data.values)):
@@ -51,12 +53,13 @@ class ProfilePredictor:
                 max1, max2 = max_values[j]
                 min1, min2 = min_values[j]
 
-                if x > min1 and x < max1 and y > min2 and y < max2:
-                    data.at[i, 'labels'] =  j
-                if x > max1 and y > max2:
-                    data.at[i, 'labels'] =  np.max(data['labels'])
-
-        score = ss(data[['param_1', 'param_2']], labels=data['labels'])
+                if min1 < x < max1 and min2 < y < max2:
+                    data.at[i, 'labels'] = j
+                elif x > max1 and y > max2:
+                    data.at[i, 'labels'] = np.max(data['labels'])
+                elif x < max1 and y < max2:
+                    data.at[i, 'labels'] = np.min(data['labels'])
+        score = silhouette_score(data[['param_1', 'param_2']], labels=data['labels'])
         return score
 
     # print(max_values)
