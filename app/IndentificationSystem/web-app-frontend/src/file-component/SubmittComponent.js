@@ -1,5 +1,5 @@
 import React from "react";
-import InputFiles from "./DataTables";
+import InputFiles from "react-input-files";
 import {Button} from "react-bootstrap";
 
 class SubmitComponent extends React.Component {

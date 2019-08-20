@@ -23,3 +23,9 @@ code {
 .content-component {
   margin-top: 20px;
 }
+.chart {
+  /*padding: 50px;*/
+  /*width: 400px;*/
+  /*height: 400px;*/
+  transform: rotate(90deg);
+}

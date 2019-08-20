@@ -8,17 +8,16 @@ class ProfilePredictor:
     def __init__(self, data, cluster):
         self.data = data.copy()
         self.cluster = cluster
-        # self.cluster_list = clusters_list
+        self.sorted_data = None
 
-    # for x in range(0, len(data_handler.param1)):
-    #     second.append(list([data_handler.param1[x], data_handler.param2[x]]))
-    #
-    # sec_data = np.array(second)
-    # sec_datapd = pd.DataFrame(sec_data)
-    # scores = []
-    # # print(second_data.param1)
-    # max_values = []
-    # min_values = []
+    def sort_data(self):
+        data = self.data.copy()
+        reset_index_data = data.reset_index()
+        prepared_data = reset_index_data.sort_values('labels')
+        final_data = prepared_data.reset_index()
+
+        self.sorted_data = final_data[['param_1', 'param_2', 'labels']]
+
     def get_best_profile(self):
         score = self.get_profile(self.cluster.fuzzy, self.cluster.data, self.data, self.cluster.grouped_data)
         self.show_result(self.data, 4, score)
@@ -55,16 +54,13 @@ class ProfilePredictor:
 
                 if min1 < x < max1 and min2 < y < max2:
                     data.at[i, 'labels'] = j
-                elif x > max1 and y > max2:
+                if x > max1 and y > max2:
                     data.at[i, 'labels'] = np.max(data['labels'])
-                elif x < max1 and y < max2:
-                    data.at[i, 'labels'] = np.min(data['labels'])
+                # elif x < max1 and y < max2:
+                #     data.at[i, 'labels'] = np.min(data['labels'])
         score = silhouette_score(data[['param_1', 'param_2']], labels=data['labels'])
         return score
 
-    # print(max_values)
-    # print(min_values)
-    # print(sec_datapd)
     def show_result(self, data, number_of_clusters, score):
         data.plot.scatter(x='param_1', y='param_2', c='labels', colormap='viridis')
         plt.xlabel("Param 1")
