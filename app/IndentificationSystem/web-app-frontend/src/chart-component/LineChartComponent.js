@@ -1,12 +1,12 @@
 import React from "react";
 import {Button} from "react-bootstrap";
-import {Line} from "react-chartjs-2";
+import {Scatter} from "react-chartjs-2";
 
 class LineChartComponent extends React.Component {
     state = {
         options: {
-            width:"800",
-            height:"800",
+            width: "800",
+            height: "800",
         },
         chartData: {
             labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
@@ -16,6 +16,7 @@ class LineChartComponent extends React.Component {
                     backgroundColor: 'rgba(75,192,192,0.4)',
                     pointBorderColor: 'rgba(75,192,192,1)',
                     pointBackgroundColor: '#fff',
+                    fill: false,
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
                     pointHoverBackgroundColor: 'rgba(75,192,192,1)',
@@ -23,14 +24,17 @@ class LineChartComponent extends React.Component {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
+                    showLine: true,
                     data: [
-                        617594,
-                        181045,
-                        153060,
-                        106519,
-                        105162,
-                        95072
-                    ],
+                        {
+                            x: 617594,
+                            y: 181045
+                        },
+                        {
+                            x: 106519,
+                            y: 153060
+                        }
+                    ]
                 }
             ]
         }
@@ -41,14 +45,26 @@ class LineChartComponent extends React.Component {
         fetch(url)
             .then(response => response.json())
             .then((data) => this.setState({
+                options: {
+                    width: "800",
+                    height: "800",
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                reverse: true,
+                            }
+                        }]
+                    }
+                },
                 chartData: {
-                    labels: Object.values(data.depth),
-                    datasets:[
+
+                    datasets: [
                         {
                             label: 'My First dataset',
                             backgroundColor: 'rgba(75,192,192,0.4)',
                             pointBorderColor: 'rgba(75,192,192,1)',
-                            pointBackgroundColor: '#fff',
+                            pointBackgroundColor: 'rgba(75,192,192,1)',
+                            borderColor: 'rgba(75,192,192,1)',
                             pointBorderWidth: 1,
                             pointHoverRadius: 5,
                             pointHoverBackgroundColor: 'rgba(75,192,192,1)',
@@ -56,7 +72,8 @@ class LineChartComponent extends React.Component {
                             pointHoverBorderWidth: 2,
                             pointRadius: 1,
                             pointHitRadius: 10,
-                            data: Object.values(data.labels)
+                            yAxes: 'reverse',
+                            data: data.profile
                         }
                     ]
                 },
@@ -75,9 +92,10 @@ class LineChartComponent extends React.Component {
                         Pokaz profil
                     </Button>
                 </div>
-                <Line className="chart" ref='chart' data={this.state.chartData} options={this.state.options}/>
+                <Scatter className="chart" ref='chart' data={this.state.chartData} options={this.state.options}/>
             </div>
         )
     };
 }
+
 export default LineChartComponent;
