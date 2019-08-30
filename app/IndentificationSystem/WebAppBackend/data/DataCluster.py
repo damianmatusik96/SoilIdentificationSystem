@@ -2,13 +2,14 @@ from sklearn.metrics import silhouette_score as ss
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn_extensions.fuzzy_kmeans import FuzzyKMeans
-
+from sklearn import metrics
 
 class DataCluster:
     def __init__(self, data):
         self.data = data.copy()
         self.grouped_data = None
         self.fuzzy = None
+        self.sorted_data = None
 
     @staticmethod
     def order_data(data, order_by):
@@ -62,6 +63,14 @@ class DataCluster:
         plt.ylabel("Param 2")
         plt.title(f'K = {number_of_clusters}, Silhouette score = {score}')
         # plt.show()
+
+    def sort_data(self):
+        data = self.data.copy()
+        reset_index_data = data.reset_index()
+        prepared_data = reset_index_data.sort_values('labels')
+        final_data = prepared_data.reset_index()
+
+        self.sorted_data = final_data[['param_1', 'param_2', 'labels']]
 
 # for self.datapd['labels']
 

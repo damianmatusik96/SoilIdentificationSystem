@@ -20,7 +20,7 @@ class ProfilePredictor:
 
     def get_best_profile(self):
         score = self.get_profile(self.cluster.fuzzy, self.cluster.data, self.data, self.cluster.grouped_data)
-        self.show_result(self.data, 4, score)
+        # self.show_result(self.data, 4, score)
 
     def get_profile(self, fuzzy, cluster_data, data, learning_data):
         min, max = self.get_bounds(cluster_data, learning_data)

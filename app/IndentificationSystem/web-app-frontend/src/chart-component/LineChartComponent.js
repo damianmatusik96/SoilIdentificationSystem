@@ -85,17 +85,11 @@ class LineChartComponent extends React.Component {
     render() {
         return (
             <div style={{padding: 50}}>
-                <div>
-                    <Button variant='dark'
-                            type='submit'
-                            onClick={() => this.getProfile()}>
-                        Pokaz profil
-                    </Button>
-                </div>
-                <Scatter className="chart" ref='chart' data={this.state.chartData} options={this.state.options}/>
+                <Scatter className="chart" ref='chart' data={data} options={options}/>
             </div>
         )
-    };
+    }
 }
+
 
 export default LineChartComponent;
